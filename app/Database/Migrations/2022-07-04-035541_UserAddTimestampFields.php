@@ -28,6 +28,6 @@ class UserAddTimestampFields extends Migration
 
     public function down()
     {
-        //$this->forge->dropTable('users');
+        $this->forge->dropColumn('users', ['created_at', 'deleted_at', 'updated_at']);
     }
 }

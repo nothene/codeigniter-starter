@@ -53,10 +53,34 @@ class UserApi extends BaseController
 
         try {
             $userModel->save($data);
+            return $this->response->setStatusCode(200)->setJSON('Create successful');
         } catch(Throwable $e){
-            echo 'Error occured on ' . PHP_EOL . $data;
+            return $this->response->setStatusCode(404)->setJSON('Create failed');
         }   
     }
+
+    public function update($id, $name = null, $email = null){
+        $userModel = model('UserModel', true);
+
+        if($name != null) {
+            $data['name'] = $name;
+        }
+
+        if($email != null) {
+            $data['email'] = $email;
+        }
+
+        if(!$userModel->find($id)){
+            return $this->response->setStatusCode(404)->setJSON('id not found');
+        }
+
+        try {
+            $userModel->update($id, $data);
+            return $this->response->setStatusCode(200)->setJSON('Update successful');
+        } catch(Throwable $e){
+            return $this->response->setStatusCode(404)->setJSON('Update failed due to the email already in use');
+        }   
+    }    
 
     public function delete($id = null){
         $userModel = model('UserModel', true);

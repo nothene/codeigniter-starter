@@ -42,6 +42,7 @@ $routes->get('/migrate', 'Migrate::index');
 $routes->get('/test', 'DatabaseTest::index');
 
 // User api routes
+$routes->match(['get', 'post'], 'api/user/update/(:num)/(:segment)/(:segment)', 'UserApi::update/$1/$2/$3');
 $routes->match(['get', 'post'], 'api/user/delete/(:num)', 'UserApi::delete/$1');
 $routes->match(['get', 'post'], 'api/user/create/(:segment)/(:segment)', 'UserApi::create/$1/$2');
 $routes->get('api/user/(:segment)', 'UserApi::index/$1');
