@@ -11,6 +11,7 @@ use CodeIgniter\Filters\SecureHeaders;
 
 class Filters extends BaseConfig
 {
+
     /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
@@ -57,7 +58,9 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $methods = [];
+    public $methods = [
+        'post' => ['csrf'],
+    ];
 
     /**
      * List of filter aliases that should run on any

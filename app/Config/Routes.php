@@ -37,6 +37,28 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+// Experimental routes
+$routes->get('/migrate', 'Migrate::index');
+$routes->get('/test', 'DatabaseTest::index');
+
+// User api routes
+$routes->match(['get', 'post'], 'api/user/delete/(:num)', 'UserApi::delete/$1');
+$routes->match(['get', 'post'], 'api/user/create/(:segment)/(:segment)', 'UserApi::create/$1/$2');
+$routes->get('api/user/(:segment)', 'UserApi::index/$1');
+$routes->get('api/user', 'UserApi::index');
+
+// News api routes
+$routes->get('api/news', 'NewsApi::index');
+
+// News view routes
+$routes->match(['get', 'post'], 'news/create', 'News::create');
+$routes->get('news/(:segment)', 'News::view/$1');
+$routes->get('news', 'News::index');
+
+// Pages view routes
+$routes->get('pages', 'Pages::index');
+$routes->get('(:any)', 'Pages::view/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
